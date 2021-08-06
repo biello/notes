@@ -5,5 +5,5 @@ Wiki
 ## Usage
 
 ```bash
-PORT=2017 wiki -db="/tmp/foo.db"
+go run main.go -db=notes.db -port=8080
 ```
