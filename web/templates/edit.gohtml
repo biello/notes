@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{.Title}}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="static/css/main.css" rel="stylesheet">
+        <script type="text/javascript" src="static/js/edit.js"></script>
+	</head>
+	<body>
+		<form action="{{.Path}}" method="POST">
+			<button type="submit">Save</button><br />
+			<div id="textdiv" contentEditable autofocus>{{.Text}}</div>
+			<textarea id="text" name="text">{{.Text}}</textarea>
+		</form>
+	</body>
+</html>

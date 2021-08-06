@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <link rel="stylesheet" href="/static/css/font-awesome-4.7.0.min.css">
+        <link rel="stylesheet" href="/static/css/login.css">
+        <script type="text/javascript" src="static/js/jquery-2.0.0.min.js"></script>
+        <script type="text/javascript" src="static/js/login.js"></script>
+    </head>
+	<body>
+        <form class="form-1" action="/login" method="post">
+            <p class="field">
+                <input id="user" type="text" name="user" placeholder="Username">
+                <i class="fa fa-user fa-lg"></i>
+            </p>
+            <p class="field">
+                <input id="password" type="password" name="password" placeholder="Password">
+                <i class="fa fa-lock fa-lg"></i>
+            </p>
+            <p class="field">
+                <input id="target" type="hidden" name="target" value="{{.Target}}">
+            </p>
+            <p class="submit">
+                <button id="loginbtn" type="submit" name="submit">Login</button>
+            </p>
+        </form>
+	</body>
+</html>
