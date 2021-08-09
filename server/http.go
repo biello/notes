@@ -22,6 +22,7 @@ func HTTP(r *gin.Engine) {
 		rootGroup.GET("favicon.ico", server.favicon)
 		rootGroup.GET("login", server.loginPage)
 		rootGroup.POST("login", server.login)
+		rootGroup.POST("signCheck", server.SignCheck)
 	}
 
 	homeGroup := r.Group("/home")

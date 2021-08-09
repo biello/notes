@@ -7,6 +7,7 @@ import (
 	"sync"
 
 	"github.com/biello/notes/db"
+	"github.com/biello/notes/web"
 	"github.com/gin-gonic/gin"
 	"github.com/russross/blackfriday"
 	"github.com/sirupsen/logrus"
@@ -26,20 +27,46 @@ func New(logger *logrus.Logger, db *db.DB) *Server {
 
 func (s *Server) SignCheckMiddleware(ctx *gin.Context) {
 	userName := ctx.Param("user")
-	err := s.db.View(func(tx *db.Tx) error {
-		u, err := tx.User([]byte(userName))
-		if err != nil || len(u.Password) == 0 {
-			return db.ErrUserNotFound
-		}
-
-		return nil
-	})
+	cookiePair, err := ctx.Request.Cookie("SID")
+	logrus.Infof("sign check middleware cookiePair: %s", cookiePair)
 	if err != nil {
+		logrus.Infof("cookie SID not found: %s", err.Error())
 		ctx.Redirect(http.StatusFound, "/login?target="+ctx.Request.URL.Path)
 		ctx.Abort()
 		return
 	}
+
+	sessionID := cookiePair.Value
+	user, ok := s.sessions.Load(sessionID)
+	if !ok {
+		logrus.Infof("SID: %d not in sessions", sessionID)
+		ctx.Redirect(http.StatusFound, "/login?target="+ctx.Request.URL.Path)
+		ctx.Abort()
+		return
+	}
+	sessionUser := user.(string)
+	if userName != sessionUser {
+		logrus.Infof("SID: %d user not macth %s != %s", sessionID, sessionUser, user)
+		ctx.String(http.StatusOK, string(web.UnauthorizedText))
+		ctx.Abort()
+		return
+	}
 	ctx.Next()
+}
+
+func (s *Server) SignCheck(ctx *gin.Context) {
+	sessionID, err := ctx.Request.Cookie("SID")
+	logrus.Infof("sign check SID: %s", sessionID)
+	if err != nil {
+		ctx.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+	_, ok := s.sessions.Load(sessionID)
+	if !ok {
+		ctx.AbortWithStatus(http.StatusUnauthorized)
+		return
+	}
+	ctx.String(http.StatusOK, "success")
 }
 
 func (s *Server) redirect(ctx *gin.Context) {

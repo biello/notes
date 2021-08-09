@@ -37,7 +37,6 @@ func (db *DB) Open(path string, mode os.FileMode) error {
 				}
 			}
 		}
-
 		return nil
 	})
 
