@@ -46,7 +46,35 @@ func (s *Server) SignCheckMiddleware(ctx *gin.Context) {
 	}
 	sessionUser := user.(string)
 	if userName != sessionUser {
-		logrus.Infof("SID: %d user not macth %s != %s", sessionID, sessionUser, user)
+		logrus.Infof("SID: %d user not macth %s != %s", sessionID, sessionUser, userName)
+		ctx.String(http.StatusOK, string(web.UnauthorizedText))
+		ctx.Abort()
+		return
+	}
+	ctx.Next()
+}
+
+func (s *Server) AdminCheckMiddleware(ctx *gin.Context) {
+	cookiePair, err := ctx.Request.Cookie("SID")
+	logrus.Infof("sign check middleware cookiePair: %s", cookiePair)
+	if err != nil {
+		logrus.Infof("cookie SID not found: %s", err.Error())
+		ctx.Redirect(http.StatusFound, "/login?target="+ctx.Request.URL.Path)
+		ctx.Abort()
+		return
+	}
+
+	sessionID := cookiePair.Value
+	user, ok := s.sessions.Load(sessionID)
+	if !ok {
+		logrus.Infof("SID: %d not in sessions", sessionID)
+		ctx.Redirect(http.StatusFound, "/login?target="+ctx.Request.URL.Path)
+		ctx.Abort()
+		return
+	}
+	sessionUser := user.(string)
+	if sessionUser != "admin" {
+		logrus.Infof("SID: %d user not admin %s", sessionID, sessionUser)
 		ctx.String(http.StatusOK, string(web.UnauthorizedText))
 		ctx.Abort()
 		return

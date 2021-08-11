@@ -17,10 +17,14 @@ func getTemplatePath() string {
 var EmptyPageText = []byte(`# Empty page
 So this is an empty page`)
 
-var UnauthorizedText = []byte(`# Unauthorized page
+var UnauthorizedText = []byte(`# Unauthorized
 Current account cannot access this page`)
 
 var Login = template.Must(GetTemplate("login.gohtml"))
+
+var Password = template.Must(GetTemplate("password.gohtml"))
+
+var Register = template.Must(GetTemplate("register.gohtml"))
 
 var Show = template.Must(GetTemplate("show.gohtml"))
 

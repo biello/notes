@@ -4,24 +4,26 @@
         <link rel="stylesheet" href="/static/css/font-awesome-4.7.0.min.css">
         <link rel="stylesheet" href="/static/css/login.css">
         <script type="text/javascript" src="/static/js/jquery-2.0.0.min.js"></script>
-        <script type="text/javascript" src="/static/js/login.js"></script>
+        <script type="text/javascript" src="/static/js/register.js"></script>
     </head>
 	<body>
         <form class="form-1" method="post">
-            <h2>Login</h2>
+            <h2>Register</h2>
             <p class="field">
                 <input id="user" type="text" name="user" placeholder="Username">
                 <i class="fa fa-user fa-lg"></i>
             </p>
             <p class="field">
-                <input id="password" type="password" name="password" placeholder="Password">
+                <input id="password1" type="password" name="password" placeholder="Password">
                 <i class="fa fa-lock fa-lg"></i>
             </p>
             <p class="field">
-                <input id="target" type="hidden" name="target" value="{{.Target}}">
+                <input id="password2" type="password" placeholder="Confirm Password">
+                <i class="fa fa-lock fa-lg"></i>
             </p>
+            
             <p class="submit">
-                <button id="loginbtn" type="button" name="submit">Login</button>
+                <button id="passwdbtn" type="button" name="submit">Submit</button>
             </p>
         </form>
 	</body>

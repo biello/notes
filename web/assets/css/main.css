@@ -30,20 +30,20 @@ body {
 button {
     margin: 1rem;
     background: #fafafa;
-  background-image: linear-gradient(to bottom, #fafafa, #dedede);
-  border-radius: 6px;
-  font-family: Helvetica;
-  color: #595959;
-  font-size: 14px;
-  padding: 6px 12px 6px 12px;
-  border: solid #b8b8b8 1px;
+    background-image: linear-gradient(to bottom, #fafafa, #dedede);
+    border-radius: 6px;
+    font-family: Helvetica;
+    color: #595959;
+    font-size: 14px;
+    padding: 6px 12px 6px 12px;
+    border: solid #b8b8b8 1px;
     cursor: pointer;
 }
 
 button:active {
     background: #f7f7f7;
-  background-image: linear-gradient(to bottom, #f7f7f7, #c4c2c4);
-  text-decoration: none;
+    background-image: linear-gradient(to bottom, #f7f7f7, #c4c2c4);
+    text-decoration: none;
 }
 
 button:focus, textarea:focus {
@@ -58,11 +58,11 @@ h5 { font-size: 1.5em; }
 h6 { font-size: 1em; }   
 
 h1, h2, h3, h4, h5, h6 {
-line-height: 1em; 
+    line-height: 1em; 
 }
 
 h1, h2, h3, h4, h5, h6, p {
-margin: 0 0 0.5rem 0; 
+    margin: 0 0 0.5rem 0; 
 }
 
 p:last-child, 
@@ -76,7 +76,7 @@ table:last-child {
 }
 
 hr {
-     border: 0; 
+    border: 0; 
     height: 0; 
     border-top: 1px solid rgba(0, 0, 0, 0.1); 
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);

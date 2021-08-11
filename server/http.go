@@ -23,6 +23,8 @@ func HTTP(r *gin.Engine) {
 		rootGroup.GET("login", server.loginPage)
 		rootGroup.POST("login", server.login)
 		rootGroup.POST("signCheck", server.SignCheck)
+		rootGroup.GET("password", server.passwordPage)
+		rootGroup.POST("password", server.password)
 	}
 
 	homeGroup := r.Group("/home")
@@ -31,15 +33,15 @@ func HTTP(r *gin.Engine) {
 		// todo
 	}
 
-	adminGroup := r.Group("/admin")
+	adminGroup := r.Group("/admin", server.AdminCheckMiddleware)
 	{
-		adminGroup.GET("", server.show)
+		adminGroup.GET("/register", server.registerPage)
+		adminGroup.POST("/register", server.register)
 		// todo
 	}
 
-	userGroup := r.Group("/notes")
+	userGroup := r.Group("/notes", server.SignCheckMiddleware)
 	{
-		userGroup.Use(server.SignCheckMiddleware)
 		userGroup.GET("", server.home)
 		userGroup.GET(":user/:page", server.show)
 		userGroup.GET(":user/:page/edit", server.edit)

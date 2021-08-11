@@ -9,7 +9,6 @@ $(function(){
 
 function initData(){
     var sid = getCookie("SID");
-    console.log(sid);
     if(sid.length != 0){
         // check session
         checkSession(sid);
@@ -59,7 +58,7 @@ function login(){
             // redirect
             window.location.href = target;
         } else {
-            alert("Data: " + JSON.stringify(data) + "\nStatus: " + status);
+            alert("Data: " + JSON.stringify(data));
         }
         
     }); 
@@ -70,7 +69,6 @@ function login(){
 function logout(){
     var date = new Date();
     date.setTime(date.getTime() - 60*60*1000); 
-    // document.cookie = "USERNAME;path=/;expires="+date.toGMTString();
     document.cookie = "SID=;path=/;expires="+date.toGMTString();
     // redirect
 }
