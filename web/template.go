@@ -28,4 +28,6 @@ var Register = template.Must(GetTemplate("register.gohtml"))
 
 var Show = template.Must(GetTemplate("show.gohtml"))
 
+var Notes = template.Must(GetTemplate("notes.gohtml"))
+
 var Edit = template.Must(GetTemplate("edit.gohtml"))

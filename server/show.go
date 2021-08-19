@@ -24,6 +24,23 @@ func (s *Server) show(ctx *gin.Context) {
 	})
 }
 
+func (s *Server) notes(ctx *gin.Context) {
+	userName := ctx.Param("user")
+	s.db.View(func(tx *db.Tx) error {
+		notes, err := tx.Notes([]byte(userName))
+
+		if err != nil || len(notes.Notes) == 0 {
+
+		}
+
+		return web.Notes.Execute(ctx.Writer, data{
+			"User":  userName,
+			"Notes": notes,
+		})
+
+	})
+}
+
 func (s *Server) home(ctx *gin.Context) {
 	userName := "home"
 	pageName := "home"

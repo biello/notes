@@ -37,12 +37,12 @@ func HTTP(r *gin.Engine) {
 	{
 		adminGroup.GET("/register", server.registerPage)
 		adminGroup.POST("/register", server.register)
-		// todo
 	}
 
 	userGroup := r.Group("/notes", server.SignCheckMiddleware)
 	{
 		userGroup.GET("", server.home)
+		userGroup.GET(":user", server.notes)
 		userGroup.GET(":user/:page", server.show)
 		userGroup.GET(":user/:page/edit", server.edit)
 

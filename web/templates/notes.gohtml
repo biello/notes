@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>{{.User}}'s notes</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link href="/static/css/main.css" rel="stylesheet">
+	</head>
+	<body>
+		<h2>{{.User}}'s notes</h2>
+		{{range .Notes.Notes}}
+			<hr />
+			<div onclick="window.location.href=window.location.href+'/{{.Name}}'">
+			<h6>{{ .Name }}</h6>
+			<p>{{ .Preview }}</p>
+			</div>	
+		{{end}}
+	</body>
+</html>

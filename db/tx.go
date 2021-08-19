@@ -27,3 +27,13 @@ func (tx *Tx) User(userName []byte) (*User, error) {
 
 	return u, u.Load()
 }
+
+// Notes list a user's notes from the database.
+func (tx *Tx) Notes(userName []byte) (*Notes, error) {
+	n := &Notes{
+		Tx:   tx,
+		User: userName,
+	}
+
+	return n, n.LoadNotes()
+}
