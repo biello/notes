@@ -31,7 +31,7 @@ func (n *Notes) LoadNotes() error {
 		if len(v) <= 100 {
 			n.Notes = append(n.Notes, Note{Name: string(k), Preview: string(v)})
 		} else {
-			n.Notes = append(n.Notes, Note{Name: string(k), Preview: string(v)[0:99]})
+			n.Notes = append(n.Notes, Note{Name: string(k), Preview: string(v)[0:99] + "..."})
 		}
 	}
 
